@@ -1,0 +1,260 @@
+{
+ "R6": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R7": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R8": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R9": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R10": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R11": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R12": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R13": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R14": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R15": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R16": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R17": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R18": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R19": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R20": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "R21": [
+  "1R2",
+  "C46193",
+  true,
+  "R_2512_6332Metric"
+ ],
+ "Q1": [
+  "AO4402",
+  "C115828",
+  true,
+  "SOIC-8_3.9x4.9mm_P1.27mm"
+ ],
+ "R35": [
+  "510R",
+  "C17734",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R36": [
+  "10K",
+  "C17414",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "F1": [
+  "2920L500/30GR 5A",
+  "C19078763",
+  true,
+  "Fuse_2920_7451Metric"
+ ],
+ "D2": [
+  "SMBJ5.0A",
+  "C440263",
+  true,
+  "D_SMB"
+ ],
+ "U2": [
+  "ATTINY1624-SSU",
+  "C5160891",
+  true,
+  "SOIC-14_3.9x8.7mm_P1.27mm"
+ ],
+ "C1": [
+  "100nF",
+  "C49678",
+  true,
+  "C_0805_2012Metric"
+ ],
+ "C2": [
+  "10uF",
+  "C15850",
+  true,
+  "C_0805_2012Metric"
+ ],
+ "UPDI1": [
+  "UPDI",
+  "",
+  false,
+  "PinSocket_1x03_P2.54mm_Vertical"
+ ],
+ "D1": [
+  "TLV431BQDBZR",
+  "C398374",
+  true,
+  "SOT-23"
+ ],
+ "R2": [
+  "1K",
+  "C17513",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "D4": [
+  "Yellow",
+  "C2296",
+  true,
+  "LED_0805_2012Metric"
+ ],
+ "R34": [
+  "2K2",
+  "C17520",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R5": [
+  "200R",
+  "C17540",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R1": [
+  "100K",
+  "C149504",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R30": [
+  "2K2",
+  "C17520",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R31": [
+  "10K",
+  "C17414",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R32": [
+  "NTC 10K B3950",
+  "C51597",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R33": [
+  "10K",
+  "C17414",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "U1": [
+  "LTV-217-B-G",
+  "C115450",
+  true,
+  "SOP-4_4.4x2.6mm_P1.27mm"
+ ],
+ "TX1": [
+  "PicoBlade 2P",
+  "C177225",
+  true,
+  "Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal"
+ ],
+ "RX1": [
+  "PicoBlade 2P",
+  "C177225",
+  true,
+  "Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal"
+ ],
+ "D3": [
+  "Red",
+  "C84256",
+  true,
+  "LED_0805_2012Metric"
+ ],
+ "R37": [
+  "2K2",
+  "C17520",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R23": [
+  "NTC 10K B3950",
+  "C51597",
+  true,
+  "R_0805_2012Metric"
+ ],
+ "R23B": [
+  "NTC 10K B3950 DNP",
+  "C51597",
+  false,
+  "R_0805_2012Metric"
+ ],
+ "G1": [
+  "LOGO",
+  "",
+  false,
+  "diybms_logo_24x10mm"
+ ]
+}
