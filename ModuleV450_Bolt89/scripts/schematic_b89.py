@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Schematic of ModuleV450 Bolt89 (drawn from the routed board's netlist)."""
+"""Schematic of ModuleV450 Bolt123 Rev B (drawn from the routed board's netlist)."""
 import sys
 import schemdraw
 import schemdraw.elements as elm
@@ -48,18 +48,18 @@ def conn(x, y, title, pins):
     return ends
 
 # ===================================================== 1) input / supply
-frame(-1, 0, 19, 12, '1  Zellanschluss, Sicherung, MCU-Versorgung (Sternpunkt an F1)')
-d.add(elm.Dot(open=True).at((0.5, 9)).label('BAT+\nPlus-Bolzen', loc='bottom', fontsize=9))
+frame(-1, 0, 19, 12, '1  Cell connection, fuse, MCU supply (star point at F1)')
+d.add(elm.Dot(open=True).at((0.5, 9)).label('BAT+\nplus bolt', loc='bottom', fontsize=9))
 f1 = d.add(elm.Fuse().at((0.5, 9)).right().length(4)
-           .label('F1\n2920L500/24SLDR\n5 A / 10 A, 3 mΩ', loc='top', fontsize=9))
+           .label('F1\n2920L500/30GR\n5 A / 10 A, 5 mΩ', loc='top', fontsize=9))
 d.add(elm.Line().right().length(1.5))
 d.add(elm.Dot())
 p_star = d.here
 d.add(elm.Line().right().length(2.0))
 d.add(elm.Line().up().length(1.5))
 d.add(elm.Line().right().length(1.5))
-tag(d.here, 'VCC (Last)')
-d.add(elm.Label().at((11.5, 10.0)).label('→ Kupferfläche zum Lastblock', fontsize=8, color='#666666', halign='left'))
+tag(d.here, 'VCC (load)')
+d.add(elm.Label().at((11.5, 10.0)).label('→ copper pour to the load block', fontsize=8, color='#666666', halign='left'))
 # MCU branch
 d.add(elm.Line().at(p_star).down().length(1.0))
 d.add(elm.Dot()); p1 = d.here
@@ -75,12 +75,12 @@ d.add(elm.Capacitor().at(p3).down().length(3).label('C1\n100 nF', loc='bottom', 
 gnd(d.here)
 d.add(elm.Line().at(p3).right().length(2.5))
 tag(d.here, 'VCC (U2 Pin 1)')
-d.add(elm.Dot(open=True).at((0.5, 2.5)).label('BAT−  Minus-Bolzen\n(Sternpunkt GND)', loc='top', fontsize=9))
+d.add(elm.Dot(open=True).at((0.5, 2.5)).label('BAT−  minus bolt\n(GND star point)', loc='top', fontsize=9))
 d.add(elm.Line().at((0.5, 2.5)).right().length(1.5))
 gnd(d.here)
 
 # ===================================================== 2) MCU
-frame(20, 0, 44, 12, '2  Mikrocontroller ATtiny1624-SSU (U2)')
+frame(20, 0, 44, 12, '2  Microcontroller ATtiny1624-SSU (U2)')
 ic = elm.Ic(pins=[
     elm.IcPin(name='VCC', pin='1', side='L'),
     elm.IcPin(name='PA0/RESET/UPDI', pin='10', side='L'),
@@ -116,21 +116,21 @@ for pin, net in right:
 gnd(u2.absanchors['GND'])
 
 # ===================================================== 3) reference + temperature sensors
-frame(45, 0, 73, 12, '3  Spannungsreferenz und Temperatursensoren')
+frame(45, 0, 73, 12, '3  Voltage reference and temperature sensors')
 # reference
 tag((46.5, 10), 'REF_EN', side='L')
 d.add(elm.Line().at((46.5, 10)).right().length(0.5))
 d.add(elm.Resistor().right().length(2.5).label('R2\n1 kΩ', fontsize=9))
 d.add(elm.Dot()); pv = d.here
 d.add(elm.Line().right().length(1)); tag(d.here, 'VREF')
-d.add(elm.Zener().at(pv).down().length(3).reverse().label('D1  TLV431BQDBZR\n1,24 V ±0,5 %', loc='bottom', fontsize=9))
+d.add(elm.Zener().at(pv).down().length(3).reverse().label('D1  TLV431BQDBZR\n1.24 V ±0.5 %', loc='bottom', fontsize=9))
 gnd(d.here)
 # internal temp
 x = 57.5
 tag((x, 10.5), 'ENABLE', side='L')
 d.add(elm.Line().at((x, 10.5)).right().length(0.6))
 d.add(elm.Line().down().length(0.5))
-d.add(elm.Thermistor().down().length(2.5).label('R32  NTC 10k\nB3950\n(Platine)', loc='bottom', fontsize=8))
+d.add(elm.Thermistor().down().length(2.5).label('R32  NTC 10k\nB3950\n(board)', loc='bottom', fontsize=8))
 d.add(elm.Dot()); pt = d.here
 d.add(elm.Line().right().length(0.8)); tag(d.here, 'PA7')
 d.add(elm.Resistor().at(pt).down().length(2.5).label('R33\n10 kΩ', loc='bottom', fontsize=9))
@@ -140,7 +140,7 @@ x = 64.5
 tag((x, 10.5), 'ENABLE', side='L')
 d.add(elm.Line().at((x, 10.5)).right().length(0.6))
 d.add(elm.Line().down().length(0.5))
-d.add(elm.Thermistor().down().length(2.5).label('R23  NTC 10k\n(Zellpol, Rand)', loc='bottom', fontsize=8))
+d.add(elm.Thermistor().down().length(2.5).label('R23  NTC 10k\n(cell terminal, edge)', loc='bottom', fontsize=8))
 d.add(elm.Dot()); pe = d.here
 d.add(elm.Line().right().length(0.8)); tag(d.here, 'PA3')
 d.add(elm.Resistor().at(pe).down().length(2.5).label('R31\n10 kΩ', loc='bottom', fontsize=9))
@@ -148,18 +148,18 @@ gnd(d.here)
 # R23B: assembly option parallel to R23
 d.add(elm.Dot().at((65.1, 10.0)))
 d.add(elm.Line().at((65.1, 10.0)).right().length(3.0))
-d.add(elm.Thermistor().down().length(2.5).label('R23B  NTC 10k\nBestückoption\n(am Lastblock, DNP)', loc='bottom', fontsize=8))
+d.add(elm.Thermistor().down().length(2.5).label('R23B  NTC 10k\nassembly option\n(at load block, DNP)', loc='bottom', fontsize=8))
 d.add(elm.Line().down().length(0.5))
 d.add(elm.Line().left().length(3.0))
 d.add(elm.Dot())
 d.add(elm.Label().at((53.8, 1.3)).label(
-    'R23 sitzt an der Unterkante direkt neben dem Plus-Bolzen. Darunter (Unterseite) eine Kupferfläche\n'
-    'am Plus-Pol als Wärmebrücke → R23 misst die Polbolzen- bzw. Zelltemperatur.\n'
-    'R23B = alternative Position am Lastblock (nicht bestückt). Nur R23 ODER R23B bestücken.',
+    'R23 sits at the bottom edge right next to the plus bolt. Underneath (bottom side) a copper area\n'
+    'on the plus terminal acts as a thermal bridge → R23 measures the terminal / cell temperature.\n'
+    'R23B = alternative position at the load block (not fitted). Fit R23 OR R23B.',
     fontsize=8, halign='left', color='#666666'))
 
 # ===================================================== 4) reset / UPDI / blue LED
-frame(-1, -13, 19, -1, '4  Reset, Programmierung (UPDI), Status-LED')
+frame(-1, -13, 19, -1, '4  Reset, programming (UPDI), status LED')
 vcc((1.5, -3.5))
 d.add(elm.Resistor().at((1.5, -3.5)).down().length(2.5).label('R1\n100 kΩ', fontsize=9))
 d.add(elm.Dot()); pr = d.here
@@ -172,12 +172,12 @@ for (px, py), nm in zip(up, ['VCC', 'RESET', None]):
 tag((12, -5), 'PA6', side='L')
 d.add(elm.Line().at((12, -5)).right().length(0.6))
 d.add(elm.Line().down().length(0.5))
-d.add(elm.LED().down().length(2.5).label('D4\ngelb', loc='bottom', fontsize=9))
-d.add(elm.Resistor().down().length(2.5).label('R34\n2,2 kΩ', loc='bottom', fontsize=9))
+d.add(elm.LED().down().length(2.5).label('D4\nyellow', loc='bottom', fontsize=9))
+d.add(elm.Resistor().down().length(2.5).label('R34\n2.2 kΩ', loc='bottom', fontsize=9))
 gnd(d.here)
 
 # ===================================================== 5) comms
-frame(20, -13, 44, -1, '5  Kommunikation (isoliert), Stecker Molex PicoBlade 1,25 mm')
+frame(20, -13, 44, -1, '5  Communication (isolated), Molex PicoBlade 1.25 mm connectors')
 tag((21, -4), 'TXD0', side='L')
 d.add(elm.Line().at((21, -4)).right().length(0.5))
 d.add(elm.Resistor().right().length(2.5).label('R5\n200 Ω', fontsize=9))
@@ -190,18 +190,18 @@ d.add(elm.Line().at(opto.emitter).right().length(2.5)); te = d.here
 txp = conn(36.0, -3.6, 'TX1  Molex 53261-0271', ['TXOUT1', 'TXOUT2'])
 d.add(elm.Line().at(te).to((te[0], txp[0][1]))); d.add(elm.Line().to(txp[0]))
 d.add(elm.Line().at(tc).to((tc[0] + 1.0, tc[1]))); d.add(elm.Line().to((tc[0] + 1.0, txp[1][1]))); d.add(elm.Line().to(txp[1]))
-d.add(elm.Label().at((30.0, -7.0)).label('Pin 1 = Emitter, Pin 2 = Kollektor\n→ zum RX des nächsten Moduls', fontsize=8, color='#666666', halign='left'))
+d.add(elm.Label().at((30.0, -7.0)).label('Pin 1 = emitter, pin 2 = collector\n→ to RX of the next module', fontsize=8, color='#666666', halign='left'))
 rxp = conn(26.5, -8.5, 'RX1  Molex 53261-0271', ['RXD0', 'VCC'])
 d.add(elm.Line().at(rxp[0]).left().length(3.2))
 d.add(elm.Dot()); prx = d.here
 d.add(elm.Line().left().length(0.3)); tag(d.here, 'RXD0', side='left')
-d.add(elm.Resistor().at(prx).down().length(2.2).label('R30\n2,2 kΩ', loc='bottom', fontsize=9))
+d.add(elm.Resistor().at(prx).down().length(2.2).label('R30\n2.2 kΩ', loc='bottom', fontsize=9))
 gnd(d.here)
 d.add(elm.Line().at(rxp[1]).left().length(0.5)); tag(d.here, 'VCC', side='left')
-d.add(elm.Label().at((29.0, -11.2)).label('RX Pin 2 (VCC) speist den Optokoppler-\nTransistor des vorherigen Moduls', fontsize=8, color='#666666', halign='left'))
+d.add(elm.Label().at((29.0, -11.2)).label('RX pin 2 (VCC) supplies the opto-\ntransistor of the previous module', fontsize=8, color='#666666', halign='left'))
 
 # ===================================================== 6) balancing load
-frame(45, -13, 73, -1, '6  Balancing-Last 16 × 1,2 Ω 2512 (4S4P = 1,2 Ω, ca. 3 A @ 3,65 V)')
+frame(45, -13, 73, -1, '6  Balancing load 16 × 1.2 Ω 2512 (4S4P = 1.2 Ω, approx. 3 A @ 3.65 V)')
 xs = 47.0
 vcc((xs, -2.8))
 d.add(elm.Line().at((xs, -2.8)).down().length(0.4))
@@ -223,10 +223,10 @@ d.add(elm.Line().at((xend, ybase)).to((xend, rows_y[-1])))
 d.add(elm.Line().at((xend, ybase)).right().length(1.0))
 d.add(elm.Dot()); pdrain = d.here
 d.add(elm.Line().right().length(0.4)); tag(d.here, 'DRAIN')
-d.add(elm.Label().at((xs + 0.4, rows_y[-1] - 0.8)).label('alle 1,2 Ω 1 % 1 W (UniOhm 25121WF120KT4E, C46193)', fontsize=8, halign='left', color='#666666'))
+d.add(elm.Label().at((xs + 0.4, rows_y[-1] - 0.8)).label('all 1.2 Ω 1 % 1 W (UniOhm 25121WF120KT4E, C46193)', fontsize=8, halign='left', color='#666666'))
 # MOSFET
 qx, qy = 64.0, -6.0
-q1 = d.add(elm.NFet().right().reverse().at((qx, qy)).label('Q1  AO4402\nSO-8 20 V\n7 mΩ @2,5 V', loc='right', fontsize=9))
+q1 = d.add(elm.NFet().right().reverse().at((qx, qy)).label('Q1  AO4402\nSO-8 20 V\n7 mΩ @2.5 V', loc='right', fontsize=9))
 d.add(elm.Line().at(q1.drain).up().length(0.6)); tag(d.here, 'DRAIN', side='right')
 d.add(elm.Line().at(q1.source).down().length(0.6)); gnd(d.here)
 d.add(elm.Line().at(q1.gate).left().length(0.8))
@@ -237,16 +237,16 @@ d.add(elm.Resistor().at(pg).down().length(2.2).label('R36\n10 kΩ', loc='bottom'
 gnd(d.here)
 # red LED
 vcc((67.5, -2.8))
-d.add(elm.LED().at((67.5, -2.8)).down().length(2.2).label('D3 rot', loc='bottom', fontsize=9))
-d.add(elm.Resistor().down().length(2.2).label('R37\n2,2 kΩ', loc='bottom', fontsize=9))
+d.add(elm.LED().at((67.5, -2.8)).down().length(2.2).label('D3 red', loc='bottom', fontsize=9))
+d.add(elm.Resistor().down().length(2.2).label('R37\n2.2 kΩ', loc='bottom', fontsize=9))
 tag(d.here, 'DRAIN', side='right')
 
 # ===================================================== title block
 d.add(elm.Label().at((45.3, -14.1)).label(
-    'ModuleV450_Bolt89 – DIYBMS v4.5 Zellmodul, Bolt-on 89 mm  ·  ATtiny1624  ·  Platine 120,5 × 31,5 mm  ·  2026-10-09',
+    'ModuleV450_Bolt89 – DIYBMS v4.5 cell module, bolt-on 89 mm  ·  ATtiny1624  ·  board 120.5 × 31.5 mm  ·  2026-10-27',
     fontsize=10, halign='left'))
 d.add(elm.Label().at((-1, -14.1)).label(
-    'Netznamen (blau) verbinden gleichnamige Punkte. GND-Fläche unten nur am Minus-Bolzen mit dem Laststrompfad verbunden.',
+    'Net names (blue) connect points of the same name. Bottom GND plane connects to the load current path only at the minus bolt.',
     fontsize=8, halign='left', color='#666666'))
 
 d.save(OUT + '.svg')
