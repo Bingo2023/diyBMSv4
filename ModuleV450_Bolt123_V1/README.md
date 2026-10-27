@@ -3,6 +3,30 @@
 Zellmodul DIYBMS v4.5 (ATtiny1624) im Format der BMS_alt (DIYBMS Lishen/EVE v1.7),
 direkt auf die Zellpole geschraubt. EMV-optimiertes Layout.
 
+| Oberseite | Unterseite |
+|---|---|
+| ![Oberseite](images/ModuleV450_Bolt123_V1_top.png) | ![Unterseite](images/ModuleV450_Bolt123_V1_bottom.png) |
+
+![Bestückte Platine (JLCPCB)](images/ModuleV450_Bolt123_V1_foto_bestueckt.jpg)
+
+*Bestückte Platine von JLCPCB (aus dem 4er-Nutzen).*
+
+## Bestellung bei JLCPCB – alle Dateien
+
+| Was | Einzelplatine | Nutzen 4× (empfohlen, „Panel by Customer“) |
+|---|---|---|
+| Gerber + Bohrdaten | `ModuleV450_Bolt123_V1_gerber_jlc.zip` | `panel4/ModuleV450_Bolt123_V1_panel4_gerber_jlc.zip` |
+| Stückliste (BOM) | `ModuleV450_Bolt123_V1_bom_jlc.csv` | `panel4/ModuleV450_Bolt123_V1_panel4_bom_jlc.csv` |
+| Bestückdaten (CPL) | `ModuleV450_Bolt123_V1_cpl_jlc.csv` | `panel4/ModuleV450_Bolt123_V1_panel4_cpl_jlc.csv` |
+| Vollständige Stückliste | `ModuleV450_Bolt123_V1_bom_full.csv` | `panel4/ModuleV450_Bolt123_V1_panel4_bom_full.csv` |
+
+Einstellungen: FR-4, 2 Lagen, 1,6 mm, 1 oz, grün, HASL bleifrei, PCB Assembly Oberseite.
+Nutzen: *Panel by Customer*, *Edge Rails/Fiducials*: keine, *PCB Qty* = Anzahl Nutzen (5 Nutzen = 20 Module), Assembly-Menge = Anzahl Nutzen.
+In der JLC-Bestückvorschau prüfen: Kathodenring D2 zur VCC-Seite (F1), Pin-1-Punkte von U1, U2, Q1 am Dreieck im Bestückdruck.
+
+![Nutzen 4x](images/ModuleV450_Bolt123_V1_panel4_top.png)
+
+
 ## Mechanik
 | | |
 |---|---|
@@ -81,6 +105,28 @@ KiCad-DRC: 0 Fehler, 0 offene Verbindungen (nur Silkscreen-Hinweise).
 
 Handbestückung: nur optional UPDI1 und ggf. R23B (statt R23).
 
+
+## Nutzen für JLCPCB („Panel by Customer“)
+Ein fertiger Nutzen liegt in `panel4/`. „Panel by JLCPCB“ ist wegen der runden Enden nicht möglich.
+
+| | |
+|---|---|
+| Inhalt | **4 × ModuleV450_Bolt123_V1** untereinander |
+| Größe | **154,5 × 146,0 mm** |
+| Trennung | 2 mm Frässchlitz, je Längskante 3 Stege à 5 mm (bei x = 5 / 73 / 118 mm, gerade Kante zwischen den Bolzen) mit 7 Sollbruchlöchern Ø 0,5 mm (Mouse Bites); Kupfer an den Stegen 0,7 mm zurückgesetzt, keine Leiterbahn an den Stegen |
+| Randstreifen | oben und unten je 5 mm, mit 3 Werkzeuglöchern Ø 1,152 mm (JLC-Standard, asymmetrisch) und 3 Passermarken (1 mm Kupfer, 2 mm Maskenöffnung) |
+| Bestückung | `ModuleV450_Bolt123_V1_panel4_bom_jlc.csv` + `_cpl_jlc.csv`, Bezeichner R1_1 … R1_4 (Nutzenplatz 1 = oben) |
+
+**Bestellung bei JLC für 20 Module:**
+* Gerber: `ModuleV450_Bolt123_V1_panel4_gerber_jlc.zip`
+* *Panel Format*: **Panel by Customer**, *Different Design*: 1, *Edge Rails/Fiducials*: **keine** (sind schon im Nutzen)
+* *PCB Qty*: **5** (Nutzen) → 20 Module
+* PCB Assembly: Menge 5, BOM und CPL aus `panel4/`
+* Erzeugt mit `scripts/panel.py` (`panel.py <board> <out> 4 5,73,118 ModuleV450_Bolt123_V1`) und `scripts/jlc.py`.
+
 ## JLCPCB
+* D2 (SMB, SMBJ5.0A C440263): JLC-Modell liegt wie KiCad → CPL-Drehung ohne Korrektur; Kathodenring muss auf der VCC-Seite (Pad 1) liegen (in der JLC-Vorschau geprüft 09.10.2026).
+* U1 (SOP-4, LTV-217): JLC-Bauteilmodell ist gegenüber KiCad um 180° verdreht → CPL-Drehung +180° (in der JLC-Vorschau geprüft 09.10.2026).
+* CPL-Positionen = Mitte der Kupfer-Pads (wie JLC die Bauteile setzt). Beim PicoBlade TX1/RX1 liegt der KiCad-Nullpunkt 0,6 mm daneben; ohne diese Korrektur ragte der Stecker in der JLC-Vorschau über die Kante (Bauteilmitte korrigiert 09.10.2026).
 FR-4, 2 Lagen, 1,6 mm, grün, LeadFree HASL, 16 Stück, PCB Assembly Top Side mit BOM + CPL.
-Drehungen in der JLC-Vorschau prüfen (SOIC-8/-14, SOP-4, SOT-23 und SMB sind wie bei V450 korrigiert).
+Drehungen in der JLC-Vorschau prüfen.
