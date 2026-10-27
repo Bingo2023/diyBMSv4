@@ -81,7 +81,7 @@ def annotate_render(src, dst, pitch_mm, side='top', dpi=300, margin_mm=1.0, half
     yc = (half_mm + margin_mm) * s + pad_top
     canvas = Image.new('RGB', (W, H + pad_top), (255, 255, 255))
     canvas.paste(im, (0, pad_top))
-    out = dimension(canvas, (xa, yc), (xb, yc), -(yc - 48), 'Lochabstand %g mm' % pitch_mm)
+    out = dimension(canvas, (xa, yc), (xb, yc), -(yc - 48), '%g mm' % pitch_mm)
     out.save(dst)
 
 
